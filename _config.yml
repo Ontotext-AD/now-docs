@@ -1,6 +1,6 @@
 markdown: kramdown
 exclude: [".rvmrc", ".rbenv-version", "Rakefile"]
-title : News UI Documentation
+title : News On the Web
 
 baseurl: /news-docs
 date: 2015

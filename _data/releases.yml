@@ -1,21 +1,19 @@
 releases:
   "v1_0_0":
     "Getting Started":
-      - "welcome"
       - "data-behind"
       - "extraction-pipe"
       - "brief-ux"
     "HowTo's":
-      - "annotating_content"
+      -
     "Miscellaneous":
       - "faq"
   "v1_2_0":
     "Getting Started":
-      - "welcome"
       - "data-behind"
       - "extraction-pipe"
       - "brief-ux"
     "HowTo's":
-      - "annotating_content"
+      -
     "Miscellaneous":
       - "faq"
