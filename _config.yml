@@ -1,6 +1,6 @@
 markdown: kramdown
 exclude: [".rvmrc", ".rbenv-version", "Rakefile"]
-title : News On the Web
+title : NOW
 
 baseurl: /news-docs
 date: 2015
@@ -9,8 +9,8 @@ ASSET_PATH : assets/boddhi
 
 collections:
   v1_0_0-docs:
+    output: false
+  v1_2_0-docs:
     output: true
-  v1_1_1-docs:
-    output: true
-  v1_1_0-docs:
+  v1_3_0-docs:
     output: true

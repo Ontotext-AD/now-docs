@@ -3,6 +3,9 @@ layout: default
 title: Welcome
 ---
 
+
+## What is NOW (News On the Web)
+
 ## Helpful hints
 
 <div class="info-badge">

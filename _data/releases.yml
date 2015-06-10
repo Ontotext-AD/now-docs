@@ -1,19 +1,31 @@
 releases:
   "v1_0_0":
     "Getting Started":
+      - "brief-ux"
+      - "high-level-architecture"
       - "data-behind"
       - "extraction-pipe"
-      - "brief-ux"
-    "HowTo's":
-      -
-    "Miscellaneous":
-      - "faq"
+    "Features":
+      - "facets"
+      - "related-concepts"
+      - "trending"
+      - "..."
+      - "..."
+    "Scenarios":
+      - "..."
+      - "..."
   "v1_2_0":
     "Getting Started":
+      - "brief-ux"
+      - "high-level-architecture"
       - "data-behind"
       - "extraction-pipe"
-      - "brief-ux"
-    "HowTo's":
-      -
-    "Miscellaneous":
-      - "faq"
+    "Features":
+      - "facets"
+      - "related-concepts"
+      - "trending"
+      - "..."
+      - "..."
+    "Scenarios":
+      - "scenario-1"
+      - "..."
