@@ -1,5 +1,5 @@
 releases:
-  "v1_2_0":
+  "v1_0_0":
     "Getting Started":
       - "brief-ux"
       - "high-level-architecture"
@@ -9,8 +9,5 @@ releases:
       - "facets"
       - "related-concepts"
       - "trending"
-      - "..."
-      - "..."
     "Scenarios":
       - "scenario-1"
-      - "..."
