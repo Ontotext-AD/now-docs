@@ -22,7 +22,7 @@ We believe it is more important to show what the article is about (most relevant
 Another useful feature we want to include is annotation on/off control with corresponding colour-coding. To get an idea, see the following image or try
 our [Tagging Service](http://tag.ontotext.com).
 
-<img src="{{ site.baseurl }}/img/Annotations_ON_OFF.png" alt="Annotations ON/OFF" style="width:600px;height:270px">
+<img src="{{ site.baseurl }}/img/Annotations_ON_OFF.png" alt="Annotations ON/OFF" style="width:600px;height:270px; margin: 0 auto">
 
 
 #### Topic pages
