@@ -7,7 +7,7 @@ releases:
       - "extraction-pipe"
     "Features":
       - "facets"
-      - "related-concepts"
+      - "top-concepts"
       - "trending"
     "Scenarios":
       - "scenario-1"

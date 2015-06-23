@@ -1,6 +1,6 @@
 markdown: kramdown
 exclude: [".rvmrc", ".rbenv-version", "Rakefile"]
-title : NOW
+title : NOW Documentation
 
 baseurl: /now-docs
 date: 2015
