@@ -1,8 +1,8 @@
 ---
 title: Trending
 layout: default
-prev_section: data-behind
-next_section: brief-ux
+prev_section: top-concepts
+next_section:
 category: Features
 permalink: v1_0_0-docs/trending/
 ---

@@ -1,0 +1,10 @@
+---
+title: Search
+layout: default
+prev_section: text-analytics
+next_section: recommendations
+category: Features
+permalink: v1_0_0-docs/search/
+---
+
+The idea is to explain what types of searches we support - FTS, concept, facet & hybrid, what's the motivation behind each of them, who can take an advantage from it and why.

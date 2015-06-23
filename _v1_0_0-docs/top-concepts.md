@@ -1,8 +1,8 @@
 ---
 title: Top Concepts
 layout: default
-prev_section:
-next_section:
+prev_section: browsing-concepts
+next_section: trending
 category: Features
 permalink: v1_0_0-docs/top-concepts/
 ---

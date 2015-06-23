@@ -6,7 +6,10 @@ releases:
       - "data-behind"
       - "extraction-pipe"
     "Features":
-      - "facets"
+      - "text-analytics"
+      - "search"
+      - "recommendations"
+      - "browsing-concepts"
       - "top-concepts"
       - "trending"
     "Scenarios":

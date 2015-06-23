@@ -1,8 +1,8 @@
 ---
 title: Scenario 1
 layout: default
-prev_section: troubleshooting
-next_section: known-issues
+prev_section:
+next_section:
 category: Scenarios
 permalink: v1_0_0-docs/scenario-1/
 ---
