@@ -1,16 +1,16 @@
 releases:
   "v1_0_0":
     "Getting Started":
-      - "brief-ux"
       - "high-level-architecture"
       - "data-behind"
       - "extraction-pipe"
     "Features":
-      - "text-analytics"
-      - "search"
+      - "channels"
+      - "trends"
+      - "content-enrichment"
+      - "smart-search"
       - "recommendations"
-      - "browsing-concepts"
-      - "top-concepts"
-      - "trending"
+      - "related-content"
+      - "concept-profile"
     "Scenarios":
       - "scenario-1"
