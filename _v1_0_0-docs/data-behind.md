@@ -20,25 +20,25 @@ There are few major classes that represent the main focus of the entity recognit
 
 #### Major classes for named entities
 The following classes are used by the pipeline during the entity recognition:
- * Person - denotes individuals in the dataset;
- * Location - various places such as geographical regions, natural locations, public or commercial places, buildings, etc. All countries are marked as Location as well;
- * Organization - profit and non-profit organizations, sports teams, military alliances;
+* Person - denotes individuals in the dataset;
+* Location - various places such as geographical regions, natural locations, public or commercial places, buildings, etc. All countries are marked as Location as well;
+* Organization - profit and non-profit organizations, sports teams, military alliances;
 
 
 #### Additional classes for named entities
 Besides the Person/Location/Organisation classes, the dataset has some additional groups of objects:
-  * Event - specifies temporary or scheduled event such as a festival or a competition;
-  * Work - intellectual or artistic creation;
-  * Animal - multicellular eukaryotic organisms;
-  * Plant - multicellular eukaryotic of the kingdom Plantae;
+* Event - specifies temporary or scheduled event such as a festival or a competition;
+* Work - intellectual or artistic creation;
+* Animal - multicellular eukaryotic organisms;
+* Plant - multicellular eukaryotic of the kingdom Plantae;
 
 #### Subclasses
 There are also several other subclasses that provide additional meaning to the named entities. So far, this information is used only for display purposes (NER work with the base classes only). Currently, there are 28 subclasses in the schema:
 
-    Artist (subclass of Person)
-    Athlete (subclass of Person)
-    Company (subclass of Organization)
-    Building (subclass of Location)
+* Artist (subclass of Person)
+* Athlete (subclass of Person)
+* Company (subclass of Organization)
+* Building (subclass of Location)
     (... 24 more)
 
 #### Mappings to external sources
