@@ -20,6 +20,7 @@ There are few major classes that represent the main focus of the entity recognit
 
 #### Major classes for named entities
 The following classes are used by the pipeline during the entity recognition:
+
 * Person - denotes individuals in the dataset;
 * Location - various places such as geographical regions, natural locations, public or commercial places, buildings, etc. All countries are marked as Location as well;
 * Organization - profit and non-profit organizations, sports teams, military alliances;
@@ -27,6 +28,7 @@ The following classes are used by the pipeline during the entity recognition:
 
 #### Additional classes for named entities
 Besides the Person/Location/Organisation classes, the dataset has some additional groups of objects:
+
 * Event - specifies temporary or scheduled event such as a festival or a competition;
 * Work - intellectual or artistic creation;
 * Animal - multicellular eukaryotic organisms;
