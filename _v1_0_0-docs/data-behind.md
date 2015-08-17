@@ -50,7 +50,10 @@ Person::Artist | http://dbpedia.org/ontology/Artist http://www.wikidata.org/enti
 Person::Politician | http://dbpedia.org/ontology/Politician  http://www.wikidata.org/entity/Q82955  http://umbel.org/umbel/rc/Politician
 ... | ...
 
-The reason we use this mapping is because we found lots of instances coming from DBpedia without clearly defined type. We try to extend that coverage by adding Wikidata and Umbel types in the stack. The mapping to the external sources is point to point so we take into account the ontology shcema of the external source. For example since we have a mapping from pub:Artist to dbp:Artist and we if we have an instance with dpb:Painter the algorithm will try to choose the most specific type from our side examining the dbp schhttp://ontology.ontotext.com/taxonomy/gender	1253202
+The reason we use this mapping is because we found lots of instances coming from DBpedia without clearly defined type. We try to extend that coverage by adding Wikidata and Umbel types in the stack. The mapping to the external sources is point to point so we take into account the ontology schema of the external source. For example since we have a mapping from pub:Artist to dbp:Artist and we if we have an instance with dpb:Painter the algorithm will try to choose the most specific type from our side examining currently loaded ontology relations (dbpeda, wikidata, umbel class trees).
+
+
+http://ontology.ontotext.com/taxonomy/gender	1253202
 http://ontology.ontotext.com/taxonomy/occupation	1174076
 http://ontology.ontotext.com/taxonomy/dateOfBirth	1032445
 http://ontology.ontotext.com/taxonomy/country	933620
@@ -58,7 +61,7 @@ http://ontology.ontotext.com/taxonomy/coordinateLocation	898982
 http://ontology.ontotext.com/taxonomy/countryOfCitizenship	846828
 ema.
 
-In the cases we still don't have a valid type we try to guess it using categorization algorithms over the description. That allows us to keep in the datasourse some incomplete but important articles from DBpedia.
+In the cases we still don't have a valid type we try to guess it using categorization algorithms over the description. That allows us to keep in the data source some incomplete but important articles from DBpedia.
 
 ##### Properties
 There are several common properties that all instances share and a number of specific properties which apply to different object types:
@@ -147,7 +150,7 @@ placeOfBirth          |	404604
 
 
 #### How do exact matches work?
-During the generation of the dataset we combined LOD instances into clusters and for each cluster an Ontotext URI is assigned. To extend the interoperability between our system and external clients and to provide an option for future upgrades of the dataset from exteranal sources we keep all LOD URIs and they can be provided upon request.
+During the generation of the dataset we combined LOD instances into clusters and for each cluster an Ontotext URI is assigned. To extend the interoperability between our system and external clients and to provide an option for future upgrades of the dataset from external sources we keep all LOD URIs and they can be provided upon request.
 
 #### How are ontotext instance URIs generated and why?
 Each URI identifies a cluster of object found in different dataset that we identified to represent a unique object. We generate these URIs using a modified version of Flake (A decentralized, k-ordered id generation service) which guarantee there are no duplicated identifiers. Flake produces short identifiers which can be represented using 64 bit numbers which also lowers the space required by different indexes in the system.  
