@@ -8,39 +8,43 @@ permalink: v1_0_0-docs/data-behind/
 ---
 
 ## Dataset
-In the current 2.1 release we crafted the publishing dataset using the latest versions of [DBpedia](http://wiki.dbpedia.org/) and [Wikidata](http://wikidata.org) datasets. In addition, there are links to [Geonames](http://www.geonames.org) instances and mappings to [Schema.org](http://schema.org) and [Umbel](http://umbel.org/) classes which increases the accuracy of the type detection for named entities.
+In the current 2.1 release we crafted the publishing dataset using the latest versions of [DBpedia](http://wiki.dbpedia.org/) and [Wikidata](http://wikidata.org). In addition, there are links to [Geonames](http://www.geonames.org) instances and mappings to classes from [Schema.org](http://schema.org) and [Umbel](http://umbel.org/) which increases the accuracy of the type detection for named entities.
 
 #### Dataset sources *(What dataset are used?)*
-We utilize the english version of DBpedia-2015-04 and corresponding Wikidata export (20150223). Mappings to Geoname and Umbel are retrieved from the DBpedia export.
+We utilize the English version of DBpedia-2015-04 and corresponding Wikidata export (20150223). Mappings to Geonames and Umbel are retrieved from the DBpedia export.
 
 #### Internal representation *(How are they merged?)*
-Each source we used to produce the dataset relies on its own ontology schema tightly related with the main purpose of the dataset and its application. There isn't a strict match between the classes found in the primary sources and their count also differs. There are many errors especially in the types that come from the external sources and very often there are entities which come with more than one basic class. The majority of problems we faced are when those classe overlap (i.e Location/Organization). To simplify the things we introduced publishing ontology schema which purpose is to describe the most interesting classes speaking in terms of news and publishing. The model aims to provide a bare minimum features required by the extraction pipeline and the rest of the platform services.
+Each source we used to produce the dataset relies on its own ontology schema tightly related with the main purpose of the dataset and its application. There isn't a strict matching between the classes found in the primary sources (LOD) and their count also differs. There are also many errors especially in the types coming from LOD sources and very often there are entities which come with more than one basic class. The majority of problems we faced are were related with class overlaps (i.e given entity is Location and  Organization at the same time). To simplify the things we introduced publishing ontology schema which purpose is to describe the most interesting classes speaking in terms of news and publishing. The model aims to provide a bare minimum of features required by the extraction pipeline and the rest of the platform services.
 
 There are few major classes that represent the main focus of the entity recognition and several subsidiary classes for better classification of the instances.
 
 ##### Major classes for named entities
-These classes are used by the pipeline during the NER process.
- * Person
- * Location
- * Organization
+These classes are used by the pipeline during the entity recognition:
+
+* Person - denotes a person in the dataset;
+* Location - various locations, buildings, places. All countries are marked as Location as well;
+* Organization - profit and non-profit organizations, sports teams, military alliances;
 
 ##### Additional classes for named entities
-Used to describe additional groups of objects and not used in the  
-  * Event
-  * Work
-  * Animal
-  * Plant
+Besides P/L/O classes the dataset has some additional groups of objects.
+
+* Event - specifies temporary or scheduled event, like a festival or competition;
+* Work - intellectual or artistic creation;
+* Animal - multicellular eukaryotic organisms;
+* Plant - multicellular eukaryotic of the kingdom Plantae;
 
 ##### Subclasses
-To Used to add more specific class information for particular entity. So far this information is for display purposes only. Currently there are 28 subclasses in the schema:
-  * Artist (subclass of Person)
-  * Athlete (subclass of Person)
-  * Company (subclass of Organization)
-  * Building (subclass of Location)
-  * ...
+There are also several additional subclasses which provide additional meaning to the named entities. So far this information is for display purposes only (NER work with the base classes only). Currently there are 28 subclasses in the schema:
+
+* Artist (subclass of Person)
+* Athlete (subclass of Person)
+* Company (subclass of Organization)
+* Building (subclass of Location)
+* *(... more 24)*
+
 
 ##### Mappings to external sources
-In order to select a preferred class for each instance in the dataset we created a mapping between the external classes and our model. This mapping is fully customizable and  
+In order to select a preferred class for each instance in the dataset we created a mapping between the external classes and our model. This mapping is fully customizable and can be tweaked to satisfy custom client requirements.
 
 Class from publishing ontology  | Classes from external sources
 ------------- | -------------
@@ -50,49 +54,69 @@ Person::Artist | http://dbpedia.org/ontology/Artist http://www.wikidata.org/enti
 Person::Politician | http://dbpedia.org/ontology/Politician  http://www.wikidata.org/entity/Q82955  http://umbel.org/umbel/rc/Politician
 ... | ...
 
-The reason we use this mapping is because we found lots of instances coming from DBpedia without clearly defined type. We try to extend that coverage by adding Wikidata and Umbel types in the stack. The mapping to the external sources is point to point so we take into account the ontology schema of the external source. For example since we have a mapping from pub:Artist to dbp:Artist and we if we have an instance with dpb:Painter the algorithm will try to choose the most specific type from our side examining currently loaded ontology relations (dbpeda, wikidata, umbel class trees).
+The reason we use such mapping is because we found lots of instances coming from DBpedia without clearly defined type. We try to extend that coverage by adding Wikidata and Umbel types in the stack. During the analysis we take into account the full ontology tree for particular LOD source. For example since we have a mapping from pub:Artist to dbp:Artist and we if we have an instance with dpb:Painter the algorithm will examine all  currently loaded ontology relations (dbpeda, wikidata, umbel class trees) and will suggest the proper class form the publishing ontology.
 
-
-http://ontology.ontotext.com/taxonomy/gender	1253202
-http://ontology.ontotext.com/taxonomy/occupation	1174076
-http://ontology.ontotext.com/taxonomy/dateOfBirth	1032445
-http://ontology.ontotext.com/taxonomy/country	933620
-http://ontology.ontotext.com/taxonomy/coordinateLocation	898982
-http://ontology.ontotext.com/taxonomy/countryOfCitizenship	846828
-ema.
-
-In the cases we still don't have a valid type we try to guess it using categorization algorithms over the description. That allows us to keep in the data source some incomplete but important articles from DBpedia.
+In the cases we still don't have a valid type we try to guess it using categorization algorithms applied over the description of the entity. That allows us to keep in the data source some incomplete but important articles from DBpedia.
 
 ##### Properties
-There are several common properties that all instances share and a number of specific properties which apply to different object types:
+There are several common properties that all instances share and a number of specific properties which apply to different object types
+
 ######  Common properties
-  * **Type**. Represents the type of the instance (one of the types in our ontology model). In order to select this type we take into account the types that we receive from the external sources and the mappings we produced. The selection of the preferred type is automated process and can be easily
-  * **Preferred label**. Represents the preferred label of an instance. This is the label displayed in the UI in the topic page for given concept.
-  * **Alternative labels**. A collection of common names under which the entity appears in varios sources. For example for *United States Department of Justice* we have alternative labels *US Justice Department*, *US DOJ* and so on.
-  * **Short description**. Briefly describes the main characteristics of the entity (e.g. *Italian painter*).
-  * **Full Description**. Full description of the entity retrieved from DBpedia abstract.
-  * **Image URI**. URI of image depicting the concept (if any).
-  * **Image thumbnail URI**. URI of the thumbnail of the image depicting the concept.
-  * **Exact matches**. List of URIs from the original sources (DBpedia,Wikidata,Geonames) which can be provided to the end user if requested.
+The common properties are applied to all entities in the KB regardless of their class.
+
+* **Type**. Represents the type of the instance (one of the types in our ontology model). In order to select this type we take into account the types that we receive from the external sources and the mappings we produced. The selection of the preferred type is automated process and can be easily
+* **Preferred label**. Represents the preferred label of an instance. This is the label displayed in the UI in the topic page for given concept.
+* **Alternative labels**. A collection of common names under which the entity appears in varios sources. For example for *United States Department of Justice* we have alternative labels *US Justice Department*, *US DOJ* and so on.
+* **Short description**. Briefly describes the main characteristics of the entity (e.g. *Italian painter*).
+* **Full Description**. Full description of the entity retrieved from DBpedia abstract.
+* **Image URI**. URI of image depicting the concept (if any).
+* **Image thumbnail URI**. URI of the thumbnail of the image depicting the concept.
+* **Exact matches**. List of URIs from the original sources (DBpedia,Wikidata,Geonames) which can be provided to the end user if requested.
 
 ###### Additional properties
 There are also a number of additional properties depending of the type of the concept.  For example if the instance type is Person it may contain information of birth day, birth place, gender, etc.
+
+* http://ontology.ontotext.com/taxonomy/gender	1253202
+* http://ontology.ontotext.com/taxonomy/occupation	1174076
+* http://ontology.ontotext.com/taxonomy/dateOfBirth	1032445
+* http://ontology.ontotext.com/taxonomy/country	933620
+* http://ontology.ontotext.com/taxonomy/coordinateLocation	898982
+* http://ontology.ontotext.com/taxonomy/countryOfCitizenship	846828
+
+There are more than 10 million individual properties from more than fifty types that we collect. Following is a list of the most common properties and counts:
+
+Property              | Count
+--------              | -----
+gender                | 1253202
+occupation            | 1174076
+dateOfBirth           | 1032445
+country	              | 933620
+coordinateLocation	  | 898982
+countryOfCitizenship  | 846828
+locatedIn             |	686095
+dateOfDeath           |	484317
+placeOfBirth          |	404604
+... | ...
+
+Currently these properties can be found in the KB Explorer component.
+
+
 
 #### Dataset statistics *(How many instances of P/L/O/Other do we have?)*
 
 This is the count of the instances grouped by major types in the dataset:
 
-- Person : 1245237
-- Location: 905198
-- Organization: 262030
+* Person : 1245237
+* Location: 905198
+* Organization: 262030
 
-- Thing: 446846
-- Event: 86318
-- Work: 549938
-- Plant: 51568
-- Animal: 212349
+* Thing (unspecified entity): 446846
+* Event: 86318
+* Work: 549938
+* Plant: 51568
+* Animal: 212349
 
-More detailed statistics showing types and subtypes can be found in the following table:
+More detailed statistics showing types and subtypes is available in the following table:
 
 Type          | Subtype           | Count
 --------------|-------------------|------
@@ -131,26 +155,8 @@ Animal		| | 212349
 Plant		| | 51568
 Thing		| | 446846
 
-
-More than 10 million individual properties
-The most common properties and counts:
-
-Property              | Count
---------              | -----
-gender                | 1253202
-occupation            | 1174076
-dateOfBirth           | 1032445
-country	              | 933620
-coordinateLocation	  | 898982
-countryOfCitizenship  | 846828
-locatedIn             |	686095
-dateOfDeath           |	484317
-placeOfBirth          |	404604
-... | ...
-
-
 #### How do exact matches work?
-During the generation of the dataset we combined LOD instances into clusters and for each cluster an Ontotext URI is assigned. To extend the interoperability between our system and external clients and to provide an option for future upgrades of the dataset from external sources we keep all LOD URIs and they can be provided upon request.
+During the generation of the dataset we combined different LOD instances into clusters and for each cluster an Ontotext URI is assigned. To extend the interoperability between our system and external clients and to provide an option for future upgrades of the dataset from external sources we keep all LOD URIs and they can be provided upon request.
 
 #### How are ontotext instance URIs generated and why?
-Each URI identifies a cluster of object found in different dataset that we identified to represent a unique object. We generate these URIs using a modified version of Flake (A decentralized, k-ordered id generation service) which guarantee there are no duplicated identifiers. Flake produces short identifiers which can be represented using 64 bit numbers which also lowers the space required by different indexes in the system.  
+Each URI identifies a cluster of object found in different dataset that we identified to represent a unique object. We generate these URIs using a modified version of Flake (A decentralized, k-ordered id generation service) which guarantee there are no duplicated identifiers. Flake produces short identifiers which can be represented internally using 64 bit numbers which also lowers the space requirements of the various components in the system.
