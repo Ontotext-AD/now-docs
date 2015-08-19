@@ -8,6 +8,10 @@ permalink: v1_0_0-docs/concept-profile/
 ---
 NOW's Topic Pages provide an in-depth perspective of the people, places and organisations mentioned in the news article currently being read. Here, users can:
 
+* scan the metadata of the concept;
+
+<img src="{{ site.baseurl }}/img/Topic_Page_Metadata.png" alt="NOW Topic Page Metadata" style="width:230px;height:320px; margin: 0 auto">
+
 * read a description of the concept and learn more about it;
 
 <img src="{{ site.baseurl }}/img/Topic_Page_Desc.png" alt="NOW Topic Page Description" style="width:700px;height:300px; margin: 0 auto">
