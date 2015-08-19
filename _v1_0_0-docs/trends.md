@@ -7,7 +7,7 @@ category: Features
 permalink: v1_0_0-docs/trends/
 ---
 
-The Top Trends feature of NOW illustrates how the most popular concepts in a category appear in the news over a specific period of time. The readers can examine patterns of behaviour for the same day, the last 7 days, or the last 30 days.
+NOW's Top Trends feature illustrates how the most popular concepts in a category appear in the news over a specific period of time. The readers can examine patterns of behaviour for the same day, the last 7 days, or the last 30 days.
 
 For example, on August 15th, 2015, there were 248 mentions of the United States of America in the International news category, while in the Science and Technology category it was mentioned only 20 times.
 
