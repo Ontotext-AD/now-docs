@@ -25,7 +25,7 @@ The extraction pipeline used in [NOW](http://now.ontotext.com) shows the text an
  
 - Similarly as the keyphrases, the **named entities (NE)** mentioned in the document provide valuable information on the subject of the document.   They are extracted in the NE  discovery and linking phase of the pipeline matching the contents of the knowledge base  against the document content using semantic Gazetteers  and resolving any ambiguity that may occur by means of a machine learning word sense disambiguation algorithm.
  
-- Since not all NE in the document are present in the knowledge base we also perform **novel named entity recognition** the discovery and handling of named entities previously unavailable in the knowledge base. 
+- Since not all NE in the document are present in the knowledge base we also perform **novel named entity recognition** - the discovery and handling of named entities previously unavailable in the knowledge base. 
  
 - In a final step the pipeline extracts **relationships** that may exist between the discovered named entities. 
  
