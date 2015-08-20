@@ -29,7 +29,7 @@ Most of the processing resources used during this phase are part of the GATE dis
 
 ## Keyphrase extraction phase
 
-This phase contains logic that generates keyphrase candidates, assigns relevance scores to the candidates, and classifies them into positive or negative instances via a heuristic ranking scheme that uses .... WHAT?
+This phase contains logic that generates keyphrase candidates, assigns relevance scores to the candidates, and classifies them into positive or negative instances via a heuristic ranking scheme that uses the term frequency, inverse document frequency and the offset of a given mention from the beginning of the document.
 
 ## Gazetteer-based enrichment phase
 
