@@ -13,25 +13,23 @@ permalink: v1_0_0-docs/extraction-pipe/
 
 
 
-The extraction pipeline used in [NOW](http://now.ontotext.com) shows the text analytics that takes place behind the scene of the [Ontotext Dynamic Semantic Publishing platform](http://ontotext.com/semantic-solutions/dynamic-semantic-publishing-platform/). It enriches the content aggregated from various news sources based on data from [DBpedia](wiki.dbpedia.org/), [WikiData](http://wikidata.org/), [GeoNames](http://www.geonames.org/) and others. The pipeline utilizes  a wide variety of linguistic and algorithmic resources -- such as semantic gazetteers, rules triggered by particular linguistic patterns, various statistical models for classification and sequence tagging trained against human-annotated corpora, etc.. These resources are chained together in a sequence (hence the name pipeline) that provides content enrichment of gradually increasing complexity, where each phase builds upon the results produced by the one that precedes it.The extraction pipe recognises mentions of entities such as Person,  Organisation, and Location, and links them if possible to a particular Knowledge Base ([DBpedia](wiki.dbpedia.org/), [WikiData](http://wikidata.org/), [GeoNames](http://www.geonames.org/) etc.) . it also tags the particularly relevant nounphrases, called keyphrases thus allowing a fast grasp into the topic of the document. Furthermore it detects  relationships between the extracted entities, as well as their relevance and confidence to the text.   
+The extraction pipeline used in [NOW](http://now.ontotext.com) shows the text analytics that takes place behind the scene of the [Ontotext Dynamic Semantic Publishing platform](http://ontotext.com/semantic-solutions/dynamic-semantic-publishing-platform/). It enriches the content aggregated from various news sources based on data from [DBpedia](wiki.dbpedia.org/), [WikiData](http://wikidata.org/), [GeoNames](http://www.geonames.org/) and others. The pipeline utilizes  a wide variety of linguistic and algorithmic resources such as semantic gazetteers, rules triggered by particular linguistic patterns, various statistical models for classification and sequence tagging trained against human-annotated corpora, etc. These resources are chained together in a sequence (hence the name pipeline) that provides content enrichment of gradually increasing complexity, where each phase builds upon the results produced by the one that precedes it. The extraction pipe recognises mentions of entities such as Person,  Organisation, and Location, and links them, if possible, to the structured knowledge behind. It also tags the relevant nounphrases, called keyphrases, thus allowing a fast grasp into the topic of the document. Furthermore, it detects  relationships between the extracted entities, as well as their relevance and confidence to the text.
 
 
 **Sketch of the pipeline:**
 
 
-- After the initial preprocessing phase (content cleanup, tokenization, sentence-splitting, morphological analysis), the pipeline performs annotation via lexicons and rules in order to extract some generic concepts like numbers, measures and metrics. 
- 
-- In a further step the **keyphrases**  are extracted. These are  noun phrases that are particularly relevant to the document and as such tend to describe its topic in a concise form. 
- 
-- Similarly as the keyphrases, the **named entities (NE)** mentioned in the document provide valuable information on the subject of the document.   They are extracted in the NE  discovery and linking phase of the pipeline matching the contents of the knowledge base  against the document content using semantic Gazetteers  and resolving any ambiguity that may occur by means of a machine learning word sense disambiguation algorithm.
- 
-- Since not all NE in the document are present in the knowledge base we also perform **novel named entity recognition** - the discovery and handling of named entities previously unavailable in the knowledge base. 
- 
-- In a final step the pipeline extracts **relationships** that may exist between the discovered named entities. 
- 
-- For all extracted keyphrases and NE, that may or may not be present in the knowledge base, the pipeline assesses the degree of importance (**relevance score**) of the concepts in the context of the article where they were discovered, as well as the sentiment of their immediate context.
- 
+- After the initial preprocessing phase (content cleanup, tokenization, sentence-splitting, morphological analysis), the pipeline performs annotation via lexicons and rules in order to extract some generic concepts like numbers, measures and metrics.
 
+- In a further step the **keyphrases** are extracted. These are noun phrases that are particularly relevant to the document and as such tend to describe its topic in a concise form.
+
+- Similarly, the **named entities (NE)** mentioned in the document also provide valuable information on its subject. They are extracted during the NE discovery and linking phase of the pipeline, where mentions of concepts from the knowledge base are recognised in the document by using a semantic gazetteer and a machine-learning word sense disambiguation algorithm.
+
+- Since not all NE in the document are present in the knowledge base, we also perform **novel named entity recognition**.
+
+- In a final step, the pipeline extracts **relationships** between the discovered named entities.
+
+- For all extracted keyphrases and NE, the pipeline assesses the degree of importance (**relevance score**) for the article where they were discovered, as well as the sentiment of their immediate context.
 
 
 We continue with a  high-level description of the phases (sub-pipelines) involved in the concept extraction pipeline:
@@ -48,6 +46,16 @@ During this phase, a very basic pre-processing takes place:
 - lemmatization (Gate Morpholocial Analyser PR)
 
 Most of the processing resources used during this phase are part of the GATE distribution. Several additional rules that improve the output and facilitate the subsequent tasks are also provided (e.g. rules that insert additional splits on newline characters and document elements available through the “Original markups” annotation set; rules that modify noun phrase chunks in order to improve the extraction of keyphrase candidates; rules that generate canonical forms for such noun phrases).
+
+## Generic entity extraction phase
+
+This phase implements a rule-based enrichment with entities of generic type. Currently, these include:
+
+- dates (normalization logic is provided as well)
+- numbers
+- money
+- percentages
+- measurements
 
 ## Keyphrase extraction phase
 
@@ -106,15 +114,6 @@ Named entities not available in the “LD Gazetteer” component's cache are not
 
 The results extracted during phases 4.1 and 4.2 are combined in a way that eliminates the overlapping among annotations produced by the disambiguation classifier and the PLO tagger components. The implemented logic guarantees that the disambiguated entities having a meaningful URI are preferred to the anonymous entities discovered by the PLO tagger whenever possible.
 
-## Generic entity extraction phase
-
-This phase implements a rule-based enrichment with entities of generic type. Currently, these include:
-
-- dates (normalization logic is provided as well)
-- numbers
-- money
-- percentages
-- measurements
 
 ## Result consolidation phase
 
