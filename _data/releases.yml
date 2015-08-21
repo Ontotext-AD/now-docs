@@ -12,5 +12,6 @@ releases:
       - "recommendations"
       - "related-content"
       - "concept-profile"
-    "Scenarios":
-      - "scenario-1"
+    "Miscellaneous":
+      - "videos"
+      - "links"

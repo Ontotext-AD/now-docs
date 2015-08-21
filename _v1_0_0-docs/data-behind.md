@@ -8,10 +8,10 @@ permalink: v1_0_0-docs/data-behind/
 ---
 
 ## Dataset
-In the current 2.1 release, we have crafted the publishing dataset using the latest versions of the  [DBpedia](http://wiki.dbpedia.org/) and [Wikidata](http://wikidata.org) datasets. In addition, there are links to [Geonames](http://www.geonames.org) instances and mappings to [Schema.org](http://schema.org) and [Umbel](http://umbel.org/) classes, which increase the accuracy of the type detection for named entities.
+In the current 2.1 release, we have crafted the publishing dataset using the latest versions of the  [DBpedia](http://wiki.dbpedia.org/) and [Wikidata](http://wikidata.org) datasets. In addition, there are links to [GeoNames](http://www.geonames.org) instances and mappings to [Schema.org](http://schema.org) and [Umbel](http://umbel.org/) classes, which increase the accuracy of the type detection for named entities.
 
 ### Dataset sources *(what dataset are used)*
-We use the English version of DBpedia-2015-04 and the corresponding Wikidata export (20150223). Mappings to Geoname and Umbel are retrieved from the DBpedia export.
+We use the English version of DBpedia-2015-04 and the corresponding Wikidata export (20150223). Mappings to GeoNames and Umbel are retrieved from the DBpedia export.
 
 ### Internal representation *(how they are merged)*
 Each source we have used to produce the dataset relies on its own ontology schema, which is tightly related to the main purpose of the dataset and its application. There is no strict match between the classes found in the primary sources and their count differs as well. Many errors occur, especially in the types coming from the external sources and often entities have more than one basic class. The majority of problems spring from overlapping classes (i.e., when an entity is both a Location and an Organization). To simplify things, we have introduced a publishing ontology schema describing the most interesting classes in terms of news and publishing. The model aims to provide the bare minimum of features required by the extraction pipeline and the rest of the platform services.
@@ -23,7 +23,7 @@ The following classes are used by the pipeline during entity recognition:
 
 * Person - individuals in the dataset;
 * Location - various places such as geographical regions, natural locations, public or commercial places, buildings, etc. All countries are also marked as Location;
-* Organization - profit and non-profit organizations, sports teams, military alliances, government institutions;
+* Organization - profit and non-profit organizations, sports teams, military alliances, government institutions.
 
 
 #### Additional classes for named entities
@@ -32,7 +32,7 @@ Besides the Person/Location/Organisation classes, the dataset has some additiona
 * Event - temporary or scheduled events such as festivals, competitions, gatherings, concerts, etc.;
 * Work - intellectual or artistic creation;
 * Animal - multicellular eukaryotic organisms;
-* Plant - multicellular eukaryotic organisms of the kingdom Plantae;
+* Plant - multicellular eukaryotic organisms of the kingdom Plantae.
 
 #### Subclasses
 There are also several other subclasses that provide additional meaning to the named entities. So far, this information has been used only for display purposes (named entity recognition work with the base classes only). Currently, there are 28 subclasses in the schema:
