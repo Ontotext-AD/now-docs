@@ -6,16 +6,20 @@ next_section: extraction-pipe
 category: Getting Started
 permalink: v1_0_0-docs/data-behind/
 ---
+In the current 2.1 release, the publishing dataset uses the latest versions of the  [DBpedia](http://wiki.dbpedia.org/) and [Wikidata](http://wikidata.org). In addition, there are links to [GeoNames](http://www.geonames.org) instances and mappings to [Schema.org](http://schema.org) and [Umbel](http://umbel.org/) classes, which increase the accuracy of the type detection for named entities.
 
-## Dataset
-In the current 2.1 release, we have crafted the publishing dataset using the latest versions of the  [DBpedia](http://wiki.dbpedia.org/) and [Wikidata](http://wikidata.org) datasets. In addition, there are links to [GeoNames](http://www.geonames.org) instances and mappings to [Schema.org](http://schema.org) and [Umbel](http://umbel.org/) classes, which increase the accuracy of the type detection for named entities.
+## Dataset sources *(what datasets are used)*
 
-### Dataset sources *(what dataset are used)*
-We use the English version of DBpedia-2015-04 and the corresponding Wikidata export (20150223). Mappings to GeoNames and Umbel are retrieved from the DBpedia export.
+* English version of DBpedia-2015-04 and the corresponding Wikidata export (20150223);
+* Mappings to GeoNames and Umbel, retrieved from the DBpedia export.
 
-### Internal representation *(how they are merged)*
-Each source we have used to produce the dataset relies on its own ontology schema, which is tightly related to the main purpose of the dataset and its application. There is no strict match between the classes found in the primary sources and their count differs as well. Many errors occur, especially in the types coming from the external sources and often entities have more than one basic class. The majority of problems spring from overlapping classes (i.e., when an entity is both a Location and an Organization). To simplify things, we have introduced a publishing ontology schema describing the most interesting classes in terms of news and publishing. The model aims to provide the bare minimum of features required by the extraction pipeline and the rest of the platform services.
+## Internal representation *(how they are merged)*
+NOW uses a custom publishing ontology schema describing the most interesting classes in terms of news and publishing. Its aim is to provide the bare minimum of features required by the extraction pipeline and the rest of the platform services.
 
+### Challenges
+As the ontology schemas of the dataset sources differ in purpose and application, their number of classes, naming and definitions of types and properties also differ. Therefore, there is no direct match between them. Many errors occur with the types coming from the external sources and the entities that have more than one basic class. The majority of problems spring from overlapping classes (i.e., when an entity is both a Location and an Organization).
+
+### Classes
 There are few major classes that represent the main focus of the entity recognition and several subsidiary classes for better classification of the instances.
 
 #### Major classes for named entities
@@ -40,7 +44,7 @@ There are also several other subclasses that provide additional meaning to the n
 * Artist (subclass of Person)
 * Athlete (subclass of Person)
 * Company (subclass of Organization)
-* Building (subclass of Location)
+* Building (subclass of Location)<br>
   (... 24 more)
 
 #### Mappings to external sources
@@ -48,21 +52,21 @@ In order to select a preferred class for each instance in the dataset, we have c
 
 Class from publishing ontology  | Classes from external sources
 ------------- | -------------
-Person  | http://dbpedia.org/ontology/Person http://www.wikidata.org/entity/Q5 http://umbel.org/umbel/rc/Person
-Person::Athlete | http://dbpedia.org/ontology/Athlete  http://www.wikidata.org/entity/Q2066131  http://umbel.org/umbel/rc/Athlete
-Person::Artist | http://dbpedia.org/ontology/Artist http://www.wikidata.org/entity/Q483501 http://umbel.org/umbel/rc/Artist
-Person::Politician | http://dbpedia.org/ontology/Politician  http://www.wikidata.org/entity/Q82955  http://umbel.org/umbel/rc/Politician
+<code>Person</code>  | <code>http://dbpedia.org/ontology/Person</code> <code>http://www.wikidata.org/entity/Q5</code> <code>http://umbel.org/umbel/rc/Person</code>
+<code>Person::Athlete</code> | <code>http://dbpedia.org/ontology/Athlete</code>  <code>http://www.wikidata.org/entity/Q2066131</code> <code>http://umbel.org/umbel/rc/Athlete</code>
+<code>Person::Artist</code> | <code>http://dbpedia.org/ontology/Artist</code> <code>http://www.wikidata.org/entity/Q483501</code> <code>http://umbel.org/umbel/rc/Artist</code>
+<code>Person::Politician</code> | <code>http://dbpedia.org/ontology/Politician</code> <code>http://www.wikidata.org/entity/Q82955</code>  <code>http://umbel.org/umbel/rc/Politician</code>
 ... | ...
 
 Such mapping is necessary because of the many instances coming from DBpedia without a clearly defined type. We have tried to extend this coverage by adding Wikidata and Umbel types in the stack. The mapping to the external sources is point to point, so we have taken into account the ontology schema of the external source.
-For example, we have a mapping from pub:Artist to dbp:Artist and if we have an instance with dpb:Painter, the algorithm will examine all currently loaded ontology relations (dbpeda, wikidata, umbel class trees) and it will suggest the proper class from the publishing ontology.
+For example, we have a mapping from <code>pub:Artist</code> to <code>dbp:Artist</code> and if we have an instance with <code>dpb:Painter</code>, the algorithm will examine all currently loaded ontology relations (dbpeda, wikidata, umbel class trees) and it will suggest the proper class from the publishing ontology.
 
 In the cases where we still do not have a valid type, we have tried to guess it by using categorisation algorithms over the description. This allows us to keep some incomplete but important articles from DBpedia in the datasourse.
 
-#### Properties
+### Properties
 There are several common properties that all instances share and a number of specific properties that apply to different object types.
 
-#####  Common properties
+####  Common properties
 The common properties are applied to all entities in the knowledge base regardless of their class.
 
 * **Type** - the type of the instance. To generate this type, we have taken into account the types of the external sources and our mapping. The selection of the preferred type is an automated process and can be easily adjusted by changing the mapping.
@@ -74,7 +78,7 @@ The common properties are applied to all entities in the knowledge base regardle
 * **Image thumbnail URI** - the URI of the thumbnail of the image depicting the concept.
 * **Exact matches** - a list of the URIs from the original sources (DBpedia,Wikidata,Geonames) that can be provided to the end user, if requested.
 
-##### Additional properties
+#### Additional properties
 There are also a number of additional properties depending of the type of the concept. For example, if the instance type is Person, it may contain information about date of birth, birth place, gender, etc.
 
 * http://ontology.ontotext.com/taxonomy/gender	1253202
@@ -101,7 +105,7 @@ placeOfBirth          |	404604
 
 Currently, these properties can be found in the KB Explorer component.
 
-### Dataset statistics *(how many instances of P/L/O/Other we have)*
+## Dataset statistics *(how many instances of P/L/O/Other we have)*
 
 This is the count of the instances grouped by major types in the dataset:
 
@@ -154,8 +158,8 @@ Animal		| | 212349
 Plant		| | 51568
 Thing		| | 446846
 
-### How exact matches work
+## How exact matches work
 During the generation of the dataset, we combined different LOD instances into clusters and an Ontotext URI was assigned for each cluster. To extend the interoperability between our system and external clients as well as to provide an option for future upgrades of the dataset from external sources, we have kept all LOD URIs and they can be provided upon request.
 
-### How Ontotext instance URIs are generated and why
+## How Ontotext instance URIs are generated and why
 Each Ontotext URI identifies a cluster of external datasets URIs representing the same unique object. These URIs were generated by using a modified version of Flake (a decentralized, k-ordered ID generation service), which guarantees that there would be no duplicated identifiers. Flake produces short identifiers that can be represented internally using 64 bit numbers, which also lowers the space requirements of the various components in the system.
