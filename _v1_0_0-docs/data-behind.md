@@ -6,7 +6,7 @@ next_section: extraction-pipe
 category: Getting Started
 permalink: v1_0_0-docs/data-behind/
 ---
-In the current 2.1 release, the publishing dataset uses the latest versions of the  [DBpedia](http://wiki.dbpedia.org/) and [Wikidata](http://wikidata.org). In addition, there are links to [GeoNames](http://www.geonames.org) instances and mappings to [Schema.org](http://schema.org) and [Umbel](http://umbel.org/) classes, which increase the accuracy of the type detection for named entities.
+In the current 2.1 release, the publishing dataset uses the latest versions of [DBpedia](http://wiki.dbpedia.org/) and [Wikidata](http://wikidata.org). In addition, there are links to [GeoNames](http://www.geonames.org) instances and mappings to [Schema.org](http://schema.org) and [Umbel](http://umbel.org/) classes, which increase the accuracy of the type detection for named entities.
 
 ## Dataset sources *(what datasets are used)*
 
@@ -26,29 +26,29 @@ There are few major classes that represent the main focus of the entity recognit
 The following classes are used by the pipeline during entity recognition:
 
 * Person - individuals in the dataset;
-* Location - various places such as geographical regions, natural locations, public or commercial places, buildings, etc. All countries are also marked as Location;
-* Organization - profit and non-profit organizations, sports teams, military alliances, government institutions.
+* Location - various places such as geographical regions, natural locations, public or commercial places, buildings, etc. All countries are also marked as Locations;
+* Organization - profit and non-profit organizations, sports teams, military alliances, government institutions, etc.
 
 
 #### Additional classes for named entities
 Besides the Person/Location/Organisation classes, the dataset has some additional groups of objects:
 
 * Event - temporary or scheduled events such as festivals, competitions, gatherings, concerts, etc.;
-* Work - intellectual or artistic creation;
+* Work - intellectual or artistic creations;
 * Animal - multicellular eukaryotic organisms;
 * Plant - multicellular eukaryotic organisms of the kingdom Plantae.
 
 #### Subclasses
 There are also several other subclasses that provide additional meaning to the named entities. So far, this information has been used only for display purposes (named entity recognition work with the base classes only). Currently, there are 28 subclasses in the schema:
 
-* Artist (subclass of Person)
-* Athlete (subclass of Person)
-* Company (subclass of Organization)
-* Building (subclass of Location)<br>
-  (... 24 more)
+* Artist (subclass of Person);
+* Athlete (subclass of Person);
+* Company (subclass of Organization);
+* Building (subclass of Location);<br>
+  (... 24 more).
 
 #### Mappings to external sources
-In order to select a preferred class for each instance in the dataset, we have created a mapping between the external classes and our model. This mapping is fully customizable and can be tweaked to satisfy any client requirements.
+For each instance in the dataset a preferred class is selected by mapping the external classes to our model. This mapping is fully customizable and can be tweaked to satisfy any client requirements.
 
 Class from publishing ontology  | Classes from external sources
 ------------- | -------------
@@ -58,10 +58,10 @@ Class from publishing ontology  | Classes from external sources
 <code>Person::Politician</code> | <code>http://dbpedia.org/ontology/Politician</code> <code>http://www.wikidata.org/entity/Q82955</code>  <code>http://umbel.org/umbel/rc/Politician</code>
 ... | ...
 
-Such mapping is necessary because of the many instances coming from DBpedia without a clearly defined type. We have tried to extend this coverage by adding Wikidata and Umbel types in the stack. The mapping to the external sources is point to point, so we have taken into account the ontology schema of the external source.
-For example, we have a mapping from <code>pub:Artist</code> to <code>dbp:Artist</code> and if we have an instance with <code>dpb:Painter</code>, the algorithm will examine all currently loaded ontology relations (dbpeda, wikidata, umbel class trees) and it will suggest the proper class from the publishing ontology.
+Such a mapping is necessary because of the many instances coming from DBpedia without a clearly defined type. We have extended this coverage by adding Wikidata and Umbel types in the stack. As the mapping to the external sources is point to point, the algorithm also considers their ontology schemas.
+For example, in order to map <code>pub:Artist</code> to <code>dbp:Artist</code> with an instance <code>dpb:Painter</code>, the algorithm examines all currently loaded ontology relations (dbpeda, wikidata, umbel class trees) and suggests the proper class from the publishing ontology.
 
-In the cases where we still do not have a valid type, we have tried to guess it by using categorisation algorithms over the description. This allows us to keep some incomplete but important articles from DBpedia in the datasourse.
+In cases where there is still no valid type, categorisation algorithms are used over the description to guess it. Thus, some incomplete but important articles from DBpedia are kept in the data source.
 
 ### Properties
 There are several common properties that all instances share and a number of specific properties that apply to different object types.
