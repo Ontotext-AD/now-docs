@@ -69,17 +69,17 @@ There are several common properties that all instances share and a number of spe
 ####  Common properties
 The common properties are applied to all entities in the knowledge base regardless of their class.
 
-* **Type** - the type of the instance. To generate this type, we have taken into account the types of the external sources and our mapping. The selection of the preferred type is an automated process and can be easily adjusted by changing the mapping.
-* **Preferred label** - the preferred label of an instance. This is the label displayed for a given concept in the topic page  in the UI.
-* **Alternative labels** - a collection of common names under which the entity appears in various sources. For example, for *United States Department of Justice* we have the alternative labels: *US Justice Department*, *US DOJ*, etc.
-* **Short description** - a brief description of the main characteristics of the entity (e.g. *an Italian painter*).
-* **Full Description** - a full description of the entity retrieved from the DBpedia abstract.
-* **Image URI** - the URI of image depicting the concept (if any).
-* **Image thumbnail URI** - the URI of the thumbnail of the image depicting the concept.
-* **Exact matches** - a list of the URIs from the original sources (DBpedia,Wikidata,Geonames) that can be provided to the end user, if requested.
+* **Type** - the type of the instance generated considering the types of the external sources and our mapping. The selection of the preferred type is an automated process and can be easily adjusted by changing the mapping.
+* **Preferred label** - the preferred label of an instance. This is the label of a given concept displayed in the Topic page.
+* **Alternative labels** - a collection of common names under which the entity appears in various sources. For example,  *United States Department of Justice* has the alternative labels: *US Justice Department*, *US DOJ*, etc.
+* **Short description** - a brief description of the main characteristics of an entity (e.g. *an Italian painter*).
+* **Full Description** - a full description of an entity retrieved from the DBpedia abstract.
+* **Image URI** - the URI of an image depicting the concept (if any).
+* **Image thumbnail URI** - the URI of the image thumbnail depicting the concept.
+* **Exact matches** - a list of URIs from the original sources (DBpedia, Wikidata, Geonames) that can be provided to the end user, if requested.
 
 #### Additional properties
-There are also a number of additional properties depending of the type of the concept. For example, if the instance type is Person, it may contain information about date of birth, birth place, gender, etc.
+There are also a number of additional properties depending on the type of the concept. For example, if the instance type is Person, it may contain information about date of birth, birth place, gender, etc.
 
 * http://ontology.ontotext.com/taxonomy/gender	1253202
 * http://ontology.ontotext.com/taxonomy/occupation	1174076
@@ -88,7 +88,7 @@ There are also a number of additional properties depending of the type of the co
 * http://ontology.ontotext.com/taxonomy/coordinateLocation	898982
 * http://ontology.ontotext.com/taxonomy/countryOfCitizenship	846828
 
-There are more than 10 million individual properties coming from more than fifty types that we have collected. The following is a list of the most common properties and counts:
+There are more than 10 million individual properties coming from more than fifty types, which have been collected. The following is a list of the most common properties and counts:
 
 Property              | Count
 --------              | -----
@@ -107,7 +107,7 @@ Currently, these properties can be found in the KB Explorer component.
 
 ## Dataset statistics *(how many instances of P/L/O/Other we have)*
 
-This is the count of the instances grouped by major types in the dataset:
+This is the count of the instances, grouped by major types in the dataset:
 
 * Person : 1245237
 * Location: 905198
@@ -159,7 +159,7 @@ Plant		| | 51568
 Thing		| | 446846
 
 ## How exact matches work
-During the generation of the dataset, we combined different LOD instances into clusters and an Ontotext URI was assigned for each cluster. To extend the interoperability between our system and external clients as well as to provide an option for future upgrades of the dataset from external sources, we have kept all LOD URIs and they can be provided upon request.
+During the generation of the dataset, different LOD instances are combined into clusters and an Ontotext URI is assigned to each of them. To extend the interoperability between our system and the client system, as well as to provide an option for future upgrades of the dataset from external sources, all LOD URIs are kept and can be provided upon request.
 
 ## How Ontotext instance URIs are generated and why
-Each Ontotext URI identifies a cluster of external datasets URIs representing the same unique object. These URIs were generated by using a modified version of Flake (a decentralized, k-ordered ID generation service), which guarantees that there would be no duplicated identifiers. Flake produces short identifiers that can be represented internally using 64 bit numbers, which also lowers the space requirements of the various components in the system.
+Each Ontotext URI identifies a cluster of URIs representing the same unique object from the external datasets. These URIs are generated by using a modified version of Flake (a decentralized, k-ordered ID generation service), which guarantees no duplication of identifiers. Flake produces short identifiers that can be represented internally using 64 bit numbers, which also lowers the space requirements of the various components in the system.
