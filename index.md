@@ -3,9 +3,7 @@ layout: default
 title: Welcome to NOW
 ---
 
-[News on the Web (NOW)](http://now.ontotext.com) is a showcase of the [Dynamic Semantic Publishing (DSP) Platform](http://ontotext.com/semantic-solutions/dynamic-semantic-publishing-platform/).
-
-It both relies on metadata and produces rich metadata to еnable dynamic creation of custom content streams, content reuse and re-purposing, and user tailored recommendations.
+[News on the Web (NOW)](http://now.ontotext.com) is a showcase of the [Dynamic Semantic Publishing (DSP) Platform](http://ontotext.com/semantic-solutions/dynamic-semantic-publishing-platform/). It both relies on metadata and produces rich metadata to еnable dynamic creation of custom content streams, content reuse and re-purposing, and user tailored recommendations.
 
 All metadata is represented in RDF and is stored in our [GraphDB™ database](http://ontotext.com/products/ontotext-graphdb/). In this showcase, we have combined [DBpedia](http://wiki.dbpedia.org/) 2015, [WikiData](http://wikidata.org), and [GeoNames](http://www.geonames.org) to create a high-coverage general purpose dataset, containing over 4 million People, Locations, Organizations, Animals, Plants and other Things.
 

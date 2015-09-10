@@ -12,12 +12,12 @@ On top of presenting the latest news by category, NOW offers a broad and in-dept
 
 The following entities are tagged:
 
-**Trusted Named Entities** - These are mentions in the text of Persons, Locations and Organizations from the Knowledge Base.
+**Trusted Named Entities** - Entities such as Persons, Locations, Organizations, etc. that are linked to the knowledge behind.
 
 <img src="{{ site.baseurl }}/img/trustedNEv.png" alt="NOW Trusted Named Entities" style="width:400px;height:200px; margin: 0 auto">
 
 
-Additional background information  from the knowledge base  as well as timelines and related stories can be retrieved upon clicking on the entity.
+Additional background information  from the knowledge base  as well as timelines and related stories can be retrieved upon clicking on them.
 
 <img src="{{ site.baseurl }}/img/trustedNE1.png" alt="NOW Content Enrichment" style="width:900px;height:500px; margin: 0 auto">
 

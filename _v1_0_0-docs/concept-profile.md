@@ -24,7 +24,7 @@ NOW's Topic Pages provide an in-depth perspective of the people, places and orga
 
 <img src="{{ site.baseurl }}/img/Topic_Page_Recent.png" alt="NOW Topic Page Recent" style="width:500px;height:300px; margin: 0 auto">
 
-* examine what other concept are usually associated with it;
+* examine what other concepts are usually associated with it;
 
 <img src="{{ site.baseurl }}/img/Topic_Page_Ass.png" alt="NOW Topic Page Associated" style="width:500px;height:400px; margin: 0 auto">
 
