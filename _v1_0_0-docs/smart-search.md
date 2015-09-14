@@ -12,8 +12,8 @@ NOW's search capabilities go far beyond ordinary full text search. Right from th
 
 Or they can use the autosuggest function to search for concepts, keywords, or a combination of both, if the concept is not listed or the keyword it is not in the database.
 
-<img src="{{ site.baseurl }}/img/Autosuggest.png" alt="NOW Autosuggest" style="width:400px;height:200px; margin: 0 auto">
+<img src="{{ site.baseurl }}/img/Autosuggest.png" alt="NOW Autosuggest" style="width:337px;height:176px; margin: 0 auto">
 
 In this way, readers can enjoy results that are interconnected and semantically enriched.
 
-<img src="{{ site.baseurl }}/img/Results.png" alt="NOW Results" style="width:800px;height:400px; margin: 0 auto">
+<img src="{{ site.baseurl }}/img/Results.png" alt="NOW Results" style="width:800px;height:323px; margin: 0 auto">
