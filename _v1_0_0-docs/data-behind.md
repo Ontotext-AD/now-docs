@@ -20,18 +20,18 @@ NOW uses a custom publishing ontology schema describing the most interesting cla
 As the ontology schemas of the dataset sources differ in purpose and application, their number of classes, naming and definitions of types and properties also differ. Therefore, there is no direct match between them. Many errors occur with the types coming from the external sources and the entities that have more than one basic class. The majority of problems spring from overlapping classes (i.e., when an entity is both a Location and an Organization).
 
 ### Classes
-There are few major classes that represent the main focus of the entity recognition and several subsidiary classes for better classification of the instances.
+There are few major classes that represent the main focus of the entity recognition and several subsidiary classes for better classification of instances.
 
 #### Major classes for named entities
 The following classes are used by the pipeline during entity recognition:
 
 * Person - individuals in the dataset;
 * Location - various places such as geographical regions, natural locations, public or commercial places, buildings, etc. All countries are also marked as Locations;
-* Organization - profit and non-profit organizations, sports teams, military alliances, government institutions, etc.
+* Organization - profit and non-profit organisations, sports teams, military alliances, government institutions, etc.
 
 
 #### Additional classes for named entities
-Besides the Person/Location/Organisation classes, the dataset has some additional groups of objects:
+Besides the Person/Location/Organization classes, the dataset has some additional groups of objects:
 
 * Event - temporary or scheduled events such as festivals, competitions, gatherings, concerts, etc.;
 * Work - intellectual or artistic creations;
@@ -39,7 +39,7 @@ Besides the Person/Location/Organisation classes, the dataset has some additiona
 * Plant - multicellular eukaryotic organisms of the kingdom Plantae.
 
 #### Subclasses
-There are also several other subclasses that provide additional meaning to the named entities. So far, this information has been used only for display purposes (named entity recognition work with the base classes only). Currently, there are 28 subclasses in the schema:
+There are also several other subclasses that provide additional meaning to the named entities. So far, this information has been used only for display purposes (named entity recognition works with the base classes only). Currently, there are 28 subclasses in the schema:
 
 * Artist (subclass of Person);
 * Athlete (subclass of Person);
@@ -48,9 +48,9 @@ There are also several other subclasses that provide additional meaning to the n
   (... 24 more).
 
 #### Mappings to external sources
-For each instance in the dataset a preferred class is selected by mapping the external classes to our model. This mapping is fully customizable and can be tweaked to satisfy any client requirements.
+When mapping the external classes to our model, a preferred class is selected for each instance in the dataset. This mapping is fully customisable and can be tweaked to satisfy any client's requirements.
 
-Class from publishing ontology  | Classes from external sources
+Class from the publishing ontology  | Classes from external sources
 ------------- | -------------
 <code>Person</code>  | <code>http://dbpedia.org/ontology/Person</code> <code>http://www.wikidata.org/entity/Q5</code> <code>http://umbel.org/umbel/rc/Person</code>
 <code>Person::Athlete</code> | <code>http://dbpedia.org/ontology/Athlete</code>  <code>http://www.wikidata.org/entity/Q2066131</code> <code>http://umbel.org/umbel/rc/Athlete</code>
@@ -58,7 +58,7 @@ Class from publishing ontology  | Classes from external sources
 <code>Person::Politician</code> | <code>http://dbpedia.org/ontology/Politician</code> <code>http://www.wikidata.org/entity/Q82955</code>  <code>http://umbel.org/umbel/rc/Politician</code>
 ... | ...
 
-Such a mapping is necessary because of the many instances coming from DBpedia without a clearly defined type. We have extended this coverage by adding Wikidata and Umbel types in the stack. As the mapping to the external sources is point to point, the algorithm also considers their ontology schemas.
+Such mapping is necessary because of the many instances coming from DBpedia without a clearly defined type. We have extended this coverage by adding Wikidata and Umbel types in the stack. As the mapping to the external sources is point to point, the algorithm also considers their ontology schemas.
 For example, in order to map <code>pub:Artist</code> to <code>dbp:Artist</code> with an instance <code>dpb:Painter</code>, the algorithm examines all currently loaded ontology relations (dbpeda, wikidata, umbel class trees) and suggests the proper class from the publishing ontology.
 
 In cases where there is still no valid type, categorisation algorithms are used over the description to guess it. Thus, some incomplete but important articles from DBpedia are kept in the data source.
@@ -69,38 +69,38 @@ There are several common properties that all instances share and a number of spe
 ####  Common properties
 The common properties are applied to all entities in the knowledge base regardless of their class.
 
-* **Type** - the type of the instance generated considering the types of the external sources and our mapping. The selection of the preferred type is an automated process and can be easily adjusted by changing the mapping.
-* **Preferred label** - the preferred label of an instance. This is the label of a given concept displayed in the Topic page.
-* **Alternative labels** - a collection of common names under which the entity appears in various sources. For example,  *United States Department of Justice* has the alternative labels: *US Justice Department*, *US DOJ*, etc.
-* **Short description** - a brief description of the main characteristics of an entity (e.g. *an Italian painter*).
-* **Full Description** - a full description of an entity retrieved from the DBpedia abstract.
-* **Image URI** - the URI of an image depicting the concept (if any).
-* **Image thumbnail URI** - the URI of the image thumbnail depicting the concept.
-* **Exact matches** - a list of URIs from the original sources (DBpedia, Wikidata, Geonames) that can be provided to the end user, if requested.
+* <code>Type</code> - the type of the instance generated considering the types of the external sources and our mapping. The selection of the preferred type is an automated process and can be easily adjusted by changing the mapping.
+* <code>Preferred label</code> - the preferred label of an instance. This is the label of a given concept displayed in the Topic page.
+* <code>Alternative labels</code> - a collection of common names under which the entity appears in various sources. For example,  *United States Department of Justice* has the alternative labels: *US Justice Department*, *US DOJ*, etc.
+* <code>Short description</code> - a brief description of the main characteristics of an entity (e.g. *an Italian painter*).
+* <code>Full Description</code> - a full description of an entity retrieved from the DBpedia abstract.
+* <code>Image URI</code> - the URI of an image depicting the concept (if any).
+* <code>Image thumbnail URI</code> - the URI of the image thumbnail depicting the concept.
+* <code>Exact matches</code> - a list of URIs from the original sources (DBpedia, Wikidata, Geonames) that can be provided to the end user, if requested.
 
 #### Additional properties
-There are also a number of additional properties depending on the type of the concept. For example, if the instance type is Person, it may contain information about date of birth, birth place, gender, etc.
+There are also a number of additional properties depending on the type of concept. For example, if the instance type is Person, it may contain information about date of birth, birth place, gender, etc.
 
-* http://ontology.ontotext.com/taxonomy/gender	1253202
-* http://ontology.ontotext.com/taxonomy/occupation	1174076
-* http://ontology.ontotext.com/taxonomy/dateOfBirth	1032445
-* http://ontology.ontotext.com/taxonomy/country	933620
-* http://ontology.ontotext.com/taxonomy/coordinateLocation	898982
-* http://ontology.ontotext.com/taxonomy/countryOfCitizenship	846828
+* <code>http://ontology.ontotext.com/taxonomy/gender</code>	1253202
+* <code>http://ontology.ontotext.com/taxonomy/occupation</code>	1174076
+* <code>http://ontology.ontotext.com/taxonomy/dateOfBirth</code>	1032445
+* <code>http://ontology.ontotext.com/taxonomy/country</code>	933620
+* <code>http://ontology.ontotext.com/taxonomy/coordinateLocation</code>	898982
+* <code>http://ontology.ontotext.com/taxonomy/countryOfCitizenshipv	846828
 
-There are more than 10 million individual properties coming from more than fifty types, which have been collected. The following is a list of the most common properties and counts:
+There are more than 10 million individual properties coming from more than fifty types. The following is a list of the most common properties and counts:
 
 Property              | Count
 --------              | -----
-gender                | 1253202
-occupation            | 1174076
-dateOfBirth           | 1032445
-country	              | 933620
-coordinateLocation	  | 898982
-countryOfCitizenship  | 846828
-locatedIn             |	686095
-dateOfDeath           |	484317
-placeOfBirth          |	404604
+<code>gender</code>                | 1253202
+<code>occupation</code>            | 1174076
+<code>dateOfBirth</code>           | 1032445
+<code>country</code>              | 933620
+<code>coordinateLocation</code>	  | 898982
+<code>countryOfCitizenship</code>  | 846828
+<code>locatedIn</code>             |	686095
+<code>dateOfDeath</code>           |	484317
+<code>placeOfBirth</code>          |	404604
 ... | ...
 
 Currently, these properties can be found in the KB Explorer component.
